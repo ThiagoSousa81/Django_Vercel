@@ -2,15 +2,15 @@
 
 # Django + Vercel
 
-This example shows how to use Django 4 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+Este exemplo mostra como usar Django 4 no Vercel com Serverless Functions usando o [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
 
 ## Demo
 
 https://django-template.vercel.app/
 
-## How it Works
+## Como funciona
 
-Our Django application, `example` is configured as an installed application in `vercel_app/settings.py`:
+Nosso aplicativo Django, `example` está configurado como um aplicativo instalado em `vercel_app/settings.py`:
 
 ```python
 # vercel_app/settings.py
@@ -20,28 +20,28 @@ INSTALLED_APPS = [
 ]
 ```
 
-We allow "\*.vercel.app" subdomains in `ALLOWED_HOSTS`, in addition to 127.0.0.1:
+Nós permitimos "\*.vercel.app" subdomínios em `ALLOWED_HOSTS`, além de 127.0.0.1:
 
 ```python
 # vercel_app/settings.py
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
 ```
 
-The `wsgi` module must use a public variable named `app` to expose the WSGI application:
+O módulo `wsgi` deve usar uma variável pública chamada `app` para expor a aplicação WSGI:
 
 ```python
 # vercel_app/wsgi.py
 app = get_wsgi_application()
 ```
 
-The corresponding `WSGI_APPLICATION` setting is configured to use the `app` variable from the `vercel_app.wsgi` module:
+A configuração `WSGI_APPLICATION` correspondente é configurada para usar a variável `app` do módulo `vercel_app.wsgi`:
 
 ```python
 # vercel_app/settings.py
 WSGI_APPLICATION = 'vercel_app.wsgi.app'
 ```
 
-There is a single view which renders the current time in `example/views.py`:
+Existe uma única visualização que renderiza a hora atual em `example/views.py`:
 
 ```python
 # example/views.py
@@ -63,7 +63,7 @@ def index(request):
     return HttpResponse(html)
 ```
 
-This view is exposed a URL through `example/urls.py`:
+Esta visualização é exposta em um URL por meio de `example/urls.py`:
 
 ```python
 # example/urls.py
@@ -77,7 +77,7 @@ urlpatterns = [
 ]
 ```
 
-Finally, it's made accessible to the Django server inside `vercel_app/urls.py`:
+Finalmente, ele fica acessível ao servidor Django dentro de `vercel_app/urls.py`:
 
 ```python
 # vercel_app/urls.py
@@ -89,18 +89,18 @@ urlpatterns = [
 ]
 ```
 
-This example uses the Web Server Gateway Interface (WSGI) with Django to enable handling requests on Vercel with Serverless Functions.
+Este exemplo usa o Web Server Gateway Interface (WSGI) com Django para permitir o tratamento de solicitações no Vercel com funções sem servidor.
 
-## Running Locally
+## Executando localmente
 
 ```bash
 python manage.py runserver
 ```
 
-Your Django application is now available at `http://localhost:8000`.
+Sua aplicação Django agora está disponível em `http://localhost:8000`.
 
-## One-Click Deploy
+## Implantação com um clique
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
+Implante o exemplo usando [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fdjango&demo-title=Django%20%2B%20Vercel&demo-description=Use%20Django%204%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fdjango-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994241/random/django.png)
